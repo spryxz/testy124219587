@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+
+  body {
+    @apply bg-[#0f172a] text-white overflow-x-hidden;
+  }
+}
+
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glass-card {
+  @apply backdrop-blur-lg bg-white/10 rounded-xl border border-white/20;
+}
+
+.glow-text {
+  @apply animate-glow;
+  text-shadow: 0 0 10px currentColor;
+}
+
+@keyframes bubble {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-20vh) scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes wave {
+  0% { transform: translateX(-100%) rotate(0deg); }
+  100% { transform: translateX(100%) rotate(360deg); }
+}
+
+.water-effect {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(14,165,233,0.05) 0%, rgba(15,23,42,0.3) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bubble {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 100%);
+  border-radius: 50%;
+  animation: bubble var(--duration) ease-in infinite;
+  opacity: 0;
+}
+
+.wave {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(14,165,233,0.1), transparent);
+  animation: wave 8s linear infinite;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes spark {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--spark-travel-x), var(--spark-travel-y)) rotate(360deg); opacity: 0; }
+}
+
+.muzzle-flash {
+  animation: flash 0.1s ease-out;
+  background: radial-gradient(circle, #0EA5E9 0%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #0EA5E9;
+  border-radius: 50%;
+  animation: spark 0.5s ease-out forwards;
+}
+
+.bullet-trail {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, #0EA5E9, transparent);
+  transform-origin: left center;
+}
